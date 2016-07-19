@@ -10,7 +10,7 @@ namespace UniversityRegistrar
   {
     public StudentTest()
     {
-      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=university_registrar__test;Integrated Security=SSPI;";
+      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=university_registrar_test;Integrated Security=SSPI;";
     }
     public void Dispose()
     {
