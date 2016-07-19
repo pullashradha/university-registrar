@@ -34,6 +34,16 @@ namespace UniversityRegistrar
       Assert.Equal(studentToSave, Student.GetAll()[0]);
       Assert.Equal(1, Student.GetAll().Count);
     }
+    [Fact]
+    public void Test_Find_ReturnsStudentByStudentNumber()
+    {
+      Student firstStudent = new Student ("Kevin Macallister", 123456, new DateTime (1995, 12, 25));
+      firstStudent.Save();
+      Student secondStudent = new Student ("Bart Simpson", 654321, new DateTime(1989, 7, 4));
+      secondStudent.Save();
+      Student foundStudent = Student.Find(firstStudent.GetNumber());
+      Assert.Equal(firstStudent, foundStudent);
+    }
     public void Dispose()
     {
       Student.DeleteAll();

@@ -120,6 +120,37 @@ namespace UniversityRegistrar
         conn.Close();
       }
     }
+    public static Student Find (int queryStudentNumber)
+    {
+      List<Student> allStudents = new List<Student> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM students WHERE student_number = @StudentNumber;", conn);
+      SqlParameter studentNumberParameter = new SqlParameter ();
+      studentNumberParameter.ParameterName = "@StudentNumber";
+      studentNumberParameter.Value = queryStudentNumber;
+      cmd.Parameters.Add(studentNumberParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int studentId = rdr.GetInt32(0);
+        string studentName = rdr.GetString(1);
+        int studentNumber = rdr.GetInt32(2);
+        DateTime? studentEnrollmentDate = rdr.GetDateTime(3);
+        Student newStudent = new Student (studentName, studentNumber, studentEnrollmentDate, studentId);
+        allStudents.Add(newStudent);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allStudents[0];
+    }
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
