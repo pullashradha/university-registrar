@@ -12,6 +12,12 @@ namespace UniversityRegistrar
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=university_registrar_test;Integrated Security=SSPI;";
     }
+    [Fact]
+    public void Test_Empty_DatabaseIsEmpty()
+    {
+      int result = Course.GetAll().Count;
+      Assert.Equal(0, result);
+    }
     public void Dispose()
     {
       // Course.DeleteAll();
