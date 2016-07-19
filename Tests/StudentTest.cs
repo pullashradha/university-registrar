@@ -14,7 +14,14 @@ namespace UniversityRegistrar
     }
     public void Dispose()
     {
-      Student.DeleteAll();
+      // Student.DeleteAll();
+    }
+    [Fact]
+    public void Test_DatabaseEmptyAtFirst()
+    {
+      int result = Student.GetAll().Count;
+
+      Assert.Equal(0, result);
     }
   }
 }
