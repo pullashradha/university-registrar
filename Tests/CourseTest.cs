@@ -33,7 +33,7 @@ namespace UniversityRegistrar
     {
       Course newCourse = new Course ("Intro to Programming", "CS101", 000000);
       newCourse.Save();
-      // Assert.Equal(newCourse, Course.GetAll(newCourse));
+      Assert.Equal(newCourse, Course.GetAll()[0]);
       Assert.Equal(1, Course.GetAll().Count);
     }
     public void Dispose()

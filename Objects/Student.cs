@@ -88,5 +88,44 @@ namespace UniversityRegistrar
       }
       return allStudents;
     }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+      SqlCommand cmd = new SqlCommand ("INSERT INTO students (name, student_number, enrollment_date) OUTPUT INSERTED.id VALUES (@StudentName, @StudentNumber, @StudentEnrollmentDate);", conn);
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@StudentName";
+      nameParameter.Value = this.GetName();
+      SqlParameter numberParameter = new SqlParameter();
+      numberParameter.ParameterName = "@StudentNumber";
+      numberParameter.Value = this.GetNumber();
+      SqlParameter enrollmentDateParameter = new SqlParameter();
+      enrollmentDateParameter.Value = this.GetEnrollmentDate();
+      enrollmentDateParameter.ParameterName = "@StudentEnrollmentDate";
+      cmd.Parameters.Add(nameParameter);
+      cmd.Parameters.Add(numberParameter);
+      cmd.Parameters.Add(enrollmentDateParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand ("DELETE FROM students;", conn);
+      cmd.ExecuteNonQuery();
+    }
   }
 }
