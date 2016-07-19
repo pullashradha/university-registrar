@@ -6,6 +6,53 @@ namespace UniversityRegistrar
 {
   public class Student
   {
+    private int _id;
+    private string _name;
+    private int _number;
+    private DateTime? _enrollmentDate;
+
+    public Student(string name, int number, DateTime? enrollmentDate, int id = 0)
+    {
+      _id = id;
+      _name = name;
+      _number = number;
+      _enrollmentDate = enrollmentDate;
+    }
+
+    public int GetId()
+    {
+      return _id;
+    }
+
+    public string GetName()
+    {
+      return _name;
+    }
+
+    public int GetNumber()
+    {
+      return _number;
+    }
+
+    public DateTime? GetEnrollmentDate()
+    {
+      return _enrollmentDate;
+    }
+
+    public void SetName(string name)
+    {
+      _name = name;
+    }
+
+    public void SetNumber(int number)
+    {
+      _number = number;
+    }
+
+    public void SetEnrollmentDate(DateTime? enrollmentDate)
+    {
+      _enrollmentDate = enrollmentDate;
+    }
 
     public static List<Student> GetAll()
     {
@@ -22,10 +69,22 @@ namespace UniversityRegistrar
       {
         int studentId = rdr.GetInt32(0);
         string studentName = rdr.GetString(1);
-        Date? studentEnrollmentDate = rdr.GetDate(2);
-        int studentNumber = rdr.GetInt32(3);
+        int studentNumber = rdr.GetInt32(2);
+        DateTime? studentEnrollmentDate = rdr.GetDateTime(3);
         Student newStudent = new Student(studentName, studentNumber, studentEnrollmentDate, studentId);
+        allStudents.Add(newStudent);
       }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+
+      return allStudents;
     }
   }
 }
