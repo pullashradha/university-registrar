@@ -18,6 +18,15 @@ namespace UniversityRegistrar
       int result = Course.GetAll().Count;
       Assert.Equal(0, result);
     }
+    [Fact]
+    public void Test_Equals_SameValuesMatch()
+    {
+      Course firstCourse = new Course("Intro to Programming", "CS101", 000000);
+      Course secondCourse = new Course("Intro to Programming", "CS101", 000000);
+      bool expected = true;
+      bool test = firstCourse.Equals(secondCourse);
+      Assert.Equal(expected, test);
+    }
     public void Dispose()
     {
       // Course.DeleteAll();

@@ -45,6 +45,24 @@ namespace UniversityRegistrar
     {
       _courseNumber = newCourseNumber;
     }
+
+    public override bool Equals(System.Object otherCourse)
+    {
+      if (!(otherCourse is Course))
+      {
+        return false;
+      }
+      else
+      {
+        Course newCourse = (Course) otherCourse;
+        bool idEquality = (this.GetId() == newCourse.GetId());
+        bool nameEquality = (this.GetName() == newCourse.GetName());
+        bool courseCodeEquality = (this.GetCourseCode() == newCourse.GetCourseCode());
+        bool courseNumberEquality = (this.GetCourseNumber() == newCourse.GetCourseNumber());
+        return (idEquality && nameEquality && courseCodeEquality && courseNumberEquality);
+      }
+    }
+
     public static List<Course> GetAll()
     {
       List<Course> allCourses = new List<Course> {};
