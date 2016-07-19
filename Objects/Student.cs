@@ -53,7 +53,22 @@ namespace UniversityRegistrar
     {
       _enrollmentDate = enrollmentDate;
     }
-
+    public override bool Equals (System.Object otherStudent)
+    {
+      if (otherStudent is Student)
+      {
+        Student newStudent = (Student) otherStudent;
+        bool idEquality = (this.GetId() == newStudent.GetId());
+        bool nameEquality = (this.GetName() == newStudent.GetName());
+        bool numberEquality = (this.GetNumber() == newStudent.GetNumber());
+        bool enrollmentDateEquality = (this.GetEnrollmentDate() == newStudent.GetEnrollmentDate());
+        return (idEquality && nameEquality && numberEquality && enrollmentDateEquality);
+      }
+      else
+      {
+        return false;
+      }
+    }
     public static List<Student> GetAll()
     {
       List<Student> allStudents = new List<Student>{};

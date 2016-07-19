@@ -34,7 +34,7 @@ No known bugs.
 
 The program should ... | Example Input | Example Output
 ----- | ----- | -----
-Add student information to database | "Jane Doe", "07-19-2016" ,"999999" | Jane Doe added to database
+Add student information to database | "Jane Doe","999999", "07-19-2016" | Jane Doe added to database
 View all students in database | --- | ---
 Find one student based on id number | --- | ---
 Add course information to database | "Intro to Programming", "CS101", "000000" | Intro to Programming added to database
