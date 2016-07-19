@@ -44,6 +44,19 @@ namespace UniversityRegistrar
       Course foundCourse = Course.Find(newCourse.GetCourseNumber());
       Assert.Equal(newCourse, foundCourse);
     }
+    [Fact]
+    public void Test_DeleteOne_DeletesOneCourse()
+    {
+      Course firstCourse = new Course ("Intro to Programming", "CS101", 000000);
+      Course secondCourse = new Course ("Physics 1", "PH311", 111111);
+      firstCourse.Save();
+      secondCourse.Save();
+      List<Course> courseList = new List<Course> {secondCourse};
+      firstCourse.DeleteOne();
+      List<Course> removedCourseList = Course.GetAll();
+      Assert.Equal(removedCourseList, courseList);
+      Assert.Equal(1, Course.GetAll().Count);
+    }
     public void Dispose()
     {
       Course.DeleteAll();

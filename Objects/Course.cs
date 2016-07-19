@@ -152,6 +152,17 @@ namespace UniversityRegistrar
       }
       return allCourses[0];
     }
+    public void DeleteOne ()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand ("DELETE FROM courses WHERE course_number = @CourseNumber;", conn);
+      SqlParameter courseNumberParameter = new SqlParameter();
+      courseNumberParameter.ParameterName = "@CourseNumber";
+      courseNumberParameter.Value = this.GetCourseNumber();
+      cmd.Parameters.Add(courseNumberParameter);
+      cmd.ExecuteNonQuery();
+    }
     public static  void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
