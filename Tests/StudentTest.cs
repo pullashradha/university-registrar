@@ -44,6 +44,18 @@ namespace UniversityRegistrar
       Student foundStudent = Student.Find(firstStudent.GetNumber());
       Assert.Equal(firstStudent, foundStudent);
     }
+    [Fact]
+    public void Test_DeleteOne_RemoveSelectedStudentFromDataBase()
+    {
+      Student firstStudent = new Student ("Kevin Macallister", 123456, new DateTime (1995, 12, 25));
+      firstStudent.Save();
+      Student secondStudent = new Student ("Bart Simpson", 654321, new DateTime(1989, 7, 4));
+      secondStudent.Save();
+      List<Student> expectedStudentsList = new List<Student> {secondStudent};
+      firstStudent.DeleteOne();
+      List<Student> result = Student.GetAll();
+      Assert.Equal(expectedStudentsList, result);
+    }
     public void Dispose()
     {
       Student.DeleteAll();

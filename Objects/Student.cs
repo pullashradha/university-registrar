@@ -151,6 +151,17 @@ namespace UniversityRegistrar
       }
       return allStudents[0];
     }
+    public void DeleteOne()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand ("DELETE FROM students WHERE student_number = @StudentNumber;", conn);
+      SqlParameter studentNumberParameter = new SqlParameter ();
+      studentNumberParameter.ParameterName = "@StudentNumber";
+      studentNumberParameter.Value = this.GetNumber();
+      cmd.Parameters.Add(studentNumberParameter);
+      cmd.ExecuteNonQuery();
+    }
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
