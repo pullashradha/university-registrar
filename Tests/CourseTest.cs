@@ -23,6 +23,7 @@ namespace UniversityRegistrar
     {
       Course firstCourse = new Course("Intro to Programming", "CS101", 000000);
       Course secondCourse = new Course("Intro to Programming", "CS101", 000000);
+      //New way of testing Equal method
       bool expected = true;
       bool test = firstCourse.Equals(secondCourse);
       Assert.Equal(expected, test);

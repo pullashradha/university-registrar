@@ -10,7 +10,6 @@ namespace UniversityRegistrar
     private string _name;
     private int _number;
     private DateTime? _enrollmentDate;
-
     public Student(string name, int number, DateTime? enrollmentDate, int id = 0)
     {
       _id = id;
@@ -18,37 +17,30 @@ namespace UniversityRegistrar
       _number = number;
       _enrollmentDate = enrollmentDate;
     }
-
     public int GetId()
     {
       return _id;
     }
-
     public string GetName()
     {
       return _name;
     }
-
     public int GetNumber()
     {
       return _number;
     }
-
     public DateTime? GetEnrollmentDate()
     {
       return _enrollmentDate;
     }
-
     public void SetName(string name)
     {
       _name = name;
     }
-
     public void SetNumber(int number)
     {
       _number = number;
     }
-
     public void SetEnrollmentDate(DateTime? enrollmentDate)
     {
       _enrollmentDate = enrollmentDate;
@@ -72,15 +64,12 @@ namespace UniversityRegistrar
     public static List<Student> GetAll()
     {
       List<Student> allStudents = new List<Student>{};
-
       SqlConnection conn = DB.Connection();
       SqlDataReader rdr = null;
       conn.Open();
-
       SqlCommand cmd = new SqlCommand("SELECT * FROM students ORDER by name ASC;", conn);
       rdr = cmd.ExecuteReader();
-
-      while(rdr.Read())
+      while (rdr.Read())
       {
         int studentId = rdr.GetInt32(0);
         string studentName = rdr.GetString(1);
@@ -89,7 +78,6 @@ namespace UniversityRegistrar
         Student newStudent = new Student(studentName, studentNumber, studentEnrollmentDate, studentId);
         allStudents.Add(newStudent);
       }
-
       if (rdr != null)
       {
         rdr.Close();
@@ -98,7 +86,6 @@ namespace UniversityRegistrar
       {
         conn.Close();
       }
-
       return allStudents;
     }
   }
