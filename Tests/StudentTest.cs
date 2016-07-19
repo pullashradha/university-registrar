@@ -56,6 +56,20 @@ namespace UniversityRegistrar
       List<Student> result = Student.GetAll();
       Assert.Equal(expectedStudentsList, result);
     }
+    [Fact]
+    public void Test_GetCourses_ReturnsAllStudentCourse()
+    {
+      Student newStudent = new Student ("Kevin Macallister", 123456, new DateTime (1995, 12, 25));
+      newStudent.Save();
+      Course firstCourse = new Course ("Intro to Programming", "CS101", 000000);
+      Course secondCourse = new Course ("Physics 1", "PH311", 111111);
+      firstCourse.Save();
+      secondCourse.Save();
+      newStudent.AddCourse(firstCourse);
+      List<Course> result = newStudent.GetCourses();
+      List<Course> testList = new List<Course> {firstCourse};
+      Assert.Equal(result, testList);
+    }
     public void Dispose()
     {
       Student.DeleteAll();

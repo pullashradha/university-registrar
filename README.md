@@ -37,10 +37,11 @@ The program should ... | Example Input | Example Output
 Add student information to database | "Jane Doe","999999", "07-19-2016" | Jane Doe added to database
 View all students in database | --- | ---
 Find one student based on student number | --- | ---
+Add student to course | --- | ---
+View all courses a student is taking | --- | --
 Add course information to database | "Intro to Programming", "CS101", "000000" | Intro to Programming added to database
 View all courses in database | --- | ---
 Find one course based on course number | --- | ---
-Add students to course | --- | ---
 View all students in one course | --- | ---
 
 ## Future Features
