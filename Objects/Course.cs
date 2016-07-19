@@ -121,6 +121,37 @@ namespace UniversityRegistrar
         conn.Close();
       }
     }
+    public static Course Find (int queryCourseNumber)
+    {
+      List<Course> allCourses = new List<Course> {};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+      SqlCommand cmd = new SqlCommand ("SELECT * FROM courses WHERE course_number = @CourseNumber;", conn);
+      SqlParameter courseNumberParameter = new SqlParameter ();
+      courseNumberParameter.ParameterName = "@CourseNumber";
+      courseNumberParameter.Value = queryCourseNumber;
+      cmd.Parameters.Add(courseNumberParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        int courseId = rdr.GetInt32(0);
+        string courseName = rdr.GetString(1);
+        string courseCode = rdr.GetString(2);
+        int courseNumber = rdr.GetInt32(3);
+        Course newCourse = new Course (courseName, courseCode, courseNumber, courseId);
+        allCourses.Add(newCourse);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allCourses[0];
+    }
     public static  void DeleteAll()
     {
       SqlConnection conn = DB.Connection();

@@ -36,6 +36,14 @@ namespace UniversityRegistrar
       Assert.Equal(newCourse, Course.GetAll()[0]);
       Assert.Equal(1, Course.GetAll().Count);
     }
+    [Fact]
+    public void Test_Find_ReturnsCourseByCourseNumber()
+    {
+      Course newCourse = new Course ("Intro to Programming", "CS101", 000000);
+      newCourse.Save();
+      Course foundCourse = Course.Find(newCourse.GetCourseNumber());
+      Assert.Equal(newCourse, foundCourse);
+    }
     public void Dispose()
     {
       Course.DeleteAll();
