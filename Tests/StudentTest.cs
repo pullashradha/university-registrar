@@ -68,11 +68,12 @@ namespace UniversityRegistrar
       newStudent.AddCourse(firstCourse);
       List<Course> result = newStudent.GetCourses();
       List<Course> testList = new List<Course> {firstCourse};
-      Assert.Equal(result, testList);
+      Assert.Equal(testList, result);
     }
     public void Dispose()
     {
       Student.DeleteAll();
+      Course.DeleteAll();
     }
   }
 }

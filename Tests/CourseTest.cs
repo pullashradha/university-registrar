@@ -60,6 +60,7 @@ namespace UniversityRegistrar
     public void Dispose()
     {
       Course.DeleteAll();
+      Student.DeleteAll();
     }
   }
 }

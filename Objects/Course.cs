@@ -167,7 +167,7 @@ namespace UniversityRegistrar
     {
       SqlConnection conn = DB.Connection();
       conn.Open();
-      SqlCommand cmd = new SqlCommand ("DELETE FROM courses;", conn);
+      SqlCommand cmd = new SqlCommand ("DELETE FROM courses; DELETE FROM students_courses;", conn);
       cmd.ExecuteNonQuery();
     }
   }
