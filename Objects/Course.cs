@@ -62,7 +62,6 @@ namespace UniversityRegistrar
         return (idEquality && nameEquality && courseCodeEquality && courseNumberEquality);
       }
     }
-
     public static List<Course> GetAll()
     {
       List<Course> allCourses = new List<Course> {};
@@ -89,6 +88,45 @@ namespace UniversityRegistrar
         conn.Close();
       }
       return allCourses;
+    }
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+      SqlCommand cmd = new SqlCommand ("INSERT INTO courses (name, course_code, course_number) OUTPUT INSERTED.id VALUES (@CourseName, @CourseCode, @CourseNumber);", conn);
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@CourseName";
+      nameParameter.Value = this.GetName();
+      SqlParameter codeParameter = new SqlParameter();
+      codeParameter.ParameterName = "@CourseCode";
+      codeParameter.Value = this.GetCourseCode();
+      SqlParameter numberParameter = new SqlParameter();
+      numberParameter.ParameterName = "@CourseNumber";
+      numberParameter.Value = this.GetCourseNumber();
+      cmd.Parameters.Add(nameParameter);
+      cmd.Parameters.Add(codeParameter);
+      cmd.Parameters.Add(numberParameter);
+      rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public static  void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand ("DELETE FROM courses;", conn);
+      cmd.ExecuteNonQuery();
     }
   }
 }

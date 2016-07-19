@@ -21,16 +21,24 @@ namespace UniversityRegistrar
     [Fact]
     public void Test_Equals_SameValuesMatch()
     {
-      Course firstCourse = new Course("Intro to Programming", "CS101", 000000);
-      Course secondCourse = new Course("Intro to Programming", "CS101", 000000);
+      Course firstCourse = new Course ("Intro to Programming", "CS101", 000000);
+      Course secondCourse = new Course ("Intro to Programming", "CS101", 000000);
       //New way of testing Equal method
       bool expected = true;
       bool test = firstCourse.Equals(secondCourse);
       Assert.Equal(expected, test);
     }
+    [Fact]
+    public void Test_Save_SavesCourseToDatabase()
+    {
+      Course newCourse = new Course ("Intro to Programming", "CS101", 000000);
+      newCourse.Save();
+      // Assert.Equal(newCourse, Course.GetAll(newCourse));
+      Assert.Equal(1, Course.GetAll().Count);
+    }
     public void Dispose()
     {
-      // Course.DeleteAll();
+      Course.DeleteAll();
     }
   }
 }
